@@ -5,6 +5,7 @@
     <recommend-view :recommends="recommends"></recommend-view>
     <div id="feature"><a href="https://act.mogujie.com/zzlx67"><img src="~assets/img/home/recommend_bg.jpg" alt=""></a></div>
     <tab-control id="tab-control" :title="['流行','新款','精选']"></tab-control>
+    <goods-list :goods="goods['pop'].list"></goods-list>
     <ul>
       <li>列表1</li>
       <li>列表2</li>
@@ -114,27 +115,47 @@
   import HomeSwiper from 'views/home/childComps/HomeSwiper'
   import RecommendView from 'views/home/childComps/RecommendView'
   import TabControl from 'components/content/tabControl/TabControl'
+  import GoodsList from 'components/content/goodsList/GoodsList'
 
-  import {getHomeMultidata} from 'network/home'
+  import {getHomeMultidata,getHomeGoodsdata} from 'network/home'
   export default {
     name:'',
     data () {
       return {
         banners: [],
-        recommends: []
+        recommends: [],
+        goods:{
+          pop:{page:0,list:[]},
+          new:{page:0,list:[]},
+          sell:{page:0,list:[]}
+        }
       }
     },
     components: {
       Navbar,
       HomeSwiper,
       RecommendView,
-      TabControl
+      TabControl,
+      GoodsList
     },
     created () {
-      getHomeMultidata().then(res => {
-        this.banners = res.data.data.banner.list;
-        this.recommends = res.data.data.recommend.list;
-      })
+      this.getHomeMultidata();
+      this.getHomeGoodsdata("pop")
+    },
+    methods: {
+      getHomeMultidata(){
+        getHomeMultidata().then(res => {
+          this.banners = res.data.data.banner.list;
+          this.recommends = res.data.data.recommend.list;
+        })
+      },
+      getHomeGoodsdata(type){
+        const page = this.goods[type].page + 1;
+        getHomeGoodsdata(type,page).then(res => {
+          this.goods[type].list.push(...res.data.data.list);
+          this.goods[type].page ++
+        })
+      }
     }
   }
 </script>

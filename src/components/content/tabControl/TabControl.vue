@@ -25,6 +25,7 @@
   #tab-control {
     display: flex;
     justify-content: space-around;
+    background-color: #fff;
   }
   .tab-control-item {
     /* flex: 1; */
