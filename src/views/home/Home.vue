@@ -1,11 +1,14 @@
 <template>
   <div id="home">
     <navbar class="home-navbar"><div slot="center">购物街</div></navbar>
-    <home-swiper :banners="banners"></home-swiper>
-    <recommend-view :recommends="recommends"></recommend-view>
-    <div id="feature"><a href="https://act.mogujie.com/zzlx67"><img src="~assets/img/home/recommend_bg.jpg" alt=""></a></div>
-    <tab-control id="tab-control" :title="['流行','新款','精选']" @tabClick="tabClick"></tab-control>
-    <goods-list :goods="goods[currentType].list"></goods-list>
+    <scroll class="content">
+      <home-swiper :banners="banners"></home-swiper>
+      <recommend-view :recommends="recommends"></recommend-view>
+      <div id="feature"><a href="https://act.mogujie.com/zzlx67"><img src="~assets/img/home/recommend_bg.jpg" alt=""></a></div>
+      <tab-control id="tab-control" :title="['流行','新款','精选']" @tabClick="tabClick"></tab-control>
+      <goods-list :goods="goods[currentType].list"></goods-list>
+    </scroll>
+
   </div>
 </template>
 <script>
@@ -14,10 +17,11 @@
   import RecommendView from 'views/home/childComps/RecommendView'
   import TabControl from 'components/content/tabControl/TabControl'
   import GoodsList from 'components/content/goodsList/GoodsList'
+  import Scroll from 'components/common/scroll/Scroll'
 
   import {getHomeMultidata,getHomeGoodsdata} from 'network/home'
   export default {
-    name:'',
+    name:'Home',
     data () {
       return {
         banners: [],
@@ -36,7 +40,8 @@
       HomeSwiper,
       RecommendView,
       TabControl,
-      GoodsList
+      GoodsList,
+      Scroll
     },
     created () {
       this.getHomeMultidata();
@@ -67,6 +72,9 @@
 <style scoped>
   #home {
     padding-top: 44px;
+    /* height: 100vh; */
+    /* overflow: hidden; */
+    /* position: relative; */
   }
   .home-navbar {
     background-color: var(--color-tint);
@@ -83,5 +91,16 @@
   #tab-control {
     position: sticky;
     top: 44px;
+  }
+  .content {
+    /* padding-top: 44px; */
+    height: 475px; 
+    /* overflow-y: scroll; */
+    overflow: hidden;
+    /* position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0; */
   }
 </style>
