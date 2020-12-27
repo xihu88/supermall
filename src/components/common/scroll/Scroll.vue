@@ -12,6 +12,12 @@
   BScroll.use(Pullup)
   export default {
     name:'Scroll',
+    props: {
+      probeType:{
+        type:Number,
+        default:0
+      }
+    },
     data () {
       return {
         scroll:null
@@ -26,13 +32,28 @@
         disableMouse: false,
       })
       this.scroll.on('scroll',(position)=>{
-        console.log(position);
+        // console.log(position);
+        this.$emit('contentScroll',position)
       })
       this.scroll.on('pullingUp',()=>{
-        console.log("加载了");
-        this.scroll.refresh()
-
+        // console.log("上拉加载了");
+        // console.log(this.scroll);
+        this.$emit("pullingUpLad");
       })
+    },
+    methods: {
+      scrollTo(x,y,time=500){
+        this.scroll.scrollTo(x,y,time)
+      },
+      refresh(){
+        this.scroll && this.scroll.refresh()
+      },
+      finishPullUp(){
+        this.scroll && this.scroll.finishPullUp()
+      },
+      getScrollY(){
+        return this.scroll?this.scroll.y : 0
+      }
     }
   }
 </script>

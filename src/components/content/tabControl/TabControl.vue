@@ -1,5 +1,5 @@
 <template>
-  <div id="tab-control">
+  <div class="tab-control">
     <div class="tab-control-item" :class="{active:index==currentIndex}" @click="itemClick(index)" v-for="(item,index) in title" :key="item"> {{item}} </div>
   </div>
 </template>
@@ -23,7 +23,7 @@
   }
 </script>
 <style scoped>
-  #tab-control {
+  .tab-control {
     display: flex;
     justify-content: space-around;
     background-color: #fff;

@@ -1,16 +1,10 @@
 <template>
   <div class="goodslist">
-    <div class="goodslistitem" v-for = "item in goods"  :key="item.title">
-      <img :src="item.show.img" alt="">
-      <div class="goodsinfo">
-        <p> {{item.title}} </p>
-        <span class="price"> ¥{{item.price}} </span>
-        <span class="collect"> {{item.cfav}} </span>
-      </div>
-    </div>
+    <goods-list-item :goods='item' v-for="(item,index) in goods" :key="index"></goods-list-item>
   </div>
 </template>
 <script>
+import GoodsListItem from './GoodsListItem'
   export default {
     name:'GoodsList',
     props: {
@@ -20,7 +14,10 @@
           return []
         }
       }
-    }
+    },
+   components: {
+     GoodsListItem
+   }
   }
 </script>
 <style scoped>
@@ -29,24 +26,4 @@
     flex-wrap: wrap;
     justify-content: space-around;
   }
-  .goodslistitem {
-    width: 48%;
-    font-size: 12px;
-  }
-  .goodslistitem .goodsinfo p {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  .goodslistitem img {
-    width: 100%;
-  }
-  .goodslistitem .price {
-    color: var(--color-high-text);
-  }
-
-  .goodsinfo {
-    text-align: center;
-  }
-
 </style>
