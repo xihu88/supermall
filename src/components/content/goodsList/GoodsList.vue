@@ -1,6 +1,6 @@
 <template>
   <div class="goodslist">
-    <goods-list-item :goods='item' v-for="(item,index) in goods" :key="index"></goods-list-item>
+    <goods-list-item :goods='item' v-for="(item,index) in goods" :key="index" ></goods-list-item>
   </div>
 </template>
 <script>
@@ -15,9 +15,9 @@ import GoodsListItem from './GoodsListItem'
         }
       }
     },
-   components: {
+    components: {
      GoodsListItem
-   }
+    }
   }
 </script>
 <style scoped>
