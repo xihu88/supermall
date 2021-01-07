@@ -61,8 +61,8 @@
       }
     }, 
     activated () {
-      this.$refs.scroll.scrollTo(0,this.scrollY,0);
       this.$refs.scroll.refresh()
+      this.$refs.scroll.scrollTo(0,this.scrollY,0);
     },
     deactivated () {
       this.scrollY = this.$refs.scroll.getScrollY()
@@ -133,6 +133,7 @@
   .home-navbar {
     background-color: var(--color-tint);
     color: #fff;
+
     /* position: fixed;
     top: 0;
     left: 0;
@@ -154,12 +155,7 @@
 
     overflow-y: scroll;
   }
-  .fixed {
-    position: fixed;
-    top: 44px;
-    left: 0;
-    right: 0;
-  }
+
   #tab-control-clone {
     position: relative;
     z-index: 3;
